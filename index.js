@@ -15,7 +15,7 @@ const generateNumbers = (targetId, count, includeStars = false) => {
 
     numbers.forEach((number,index) => {
         const numberElement = document.createElement('li');
-        numberElement.className = index === count - 1 ? 'bonus-ball' : 'number-ball';
+        numberElement.className = index === count - 0 ? 'bonus-ball' : 'number-ball';
         numberElement.textContent = `${number}   `;
         numbersShow.appendChild(numberElement)
     })
