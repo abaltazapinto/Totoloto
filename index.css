@@ -8,6 +8,7 @@ body {
     align-items: center;
     height: 100vh;
     width: 100%;
+    flex-direction: column;
 }
 
 .games {
@@ -29,11 +30,12 @@ body {
 
 }
 .games > img {
-    width: 40em;
-    height: 10em;
-    max-width: 75%;
+    width: 75%;
+    height: 10%;
+    max-width: fit-content;
     margin-top:  10px auto; /* Add this line to center the image horizontally */
     border: 2px solid black;
+    border-radius: 10%;
 }
 
 .games h3 {
@@ -77,10 +79,42 @@ button {
     font-size: 16px;
 }
 
-
+/* Base styles for the button */
 button {
     margin-top: 20px; /* Space between the button and the numbers */
     padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 20%;
+    width: 40%;
+    font-size: 16px; /* Adjusted to a readable size */
+    border-radius: 10px; /* Adjusted for a consistent look */
+    border: none; /* Optional: remove default border */
+    background-color: #007BFF; /* Background color */
+    color: #fff; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media queries for smaller devices */
+
+/* For devices with a width of up to 600px (commonly used for mobile) */
+@media only screen and (max-width: 600px) {
+    button {
+        width: 80%; /* Make the button wider for easier tapping */
+        font-size: 14px; /* Slightly smaller font size for mobile */
+        padding: 12px 24px; /* Adjust padding for better touch interaction */
+    }
+}
+
+/* For devices with a width of up to 400px (small mobile screens) */
+@media only screen and (max-width: 400px) {
+    button {
+        width: 90%; /* Make the button almost full width */
+        font-size: 12px; /* Smaller font size */
+        padding: 14px 28px; /* Adjust padding */
+    }
 }
