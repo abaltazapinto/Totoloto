@@ -9,7 +9,10 @@ const generateNumbers = (targetId, count, includeStars = false) => {
     numbersShow.innerHTML = ''; 
 
     for (let i = 0; i < 5; i++) {
-        const randomNumber = Math.floor(Math.random() * 50) + 1;
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 50) + 1;
+        }while (numbers.includes(randomNumber));
         numbers.push(randomNumber);
     }
 
@@ -21,7 +24,7 @@ const generateNumbers = (targetId, count, includeStars = false) => {
     })
 
     if (includeStars) {
-        generateStars('bonus-ball')
+        generateStars('stars')
     }
 
 }
@@ -39,7 +42,10 @@ const generateStars = (targetId)=> {
     if(!starsShow) return;
     const stars = [];
     for (let i = 0; i < 2; i++) {
-        const randomNumber = Math.floor(Math.random() * 9) + 1
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 9) + 1;
+        } while (stars.includes(randomNumber));
         stars.push(randomNumber);
     }
 
