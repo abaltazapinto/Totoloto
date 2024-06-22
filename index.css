@@ -22,14 +22,8 @@ body {
     text-align: center;
     margin: 20px;
 }
-
-.games h1 {    
-    margin: 0;
-    padding: 20px;
-
-}
 .games > img {
-    width: 100%;
+    width: 80%;
     height: auto;
     max-width: fit-content;
     margin-top:  10px auto; /* Add this line to center the image horizontally */
