@@ -14,8 +14,7 @@ body {
 .games {
     direction: column;
     align-items: center;
-
-    max-width: 50%;
+    max-width: 100%;
     min-height: 50%;
     align-items: center;
     justify-content: center;
@@ -30,12 +29,12 @@ body {
 
 }
 .games > img {
-    width: 75%;
-    height: 10%;
+    width: 100%;
+    height: auto;
     max-width: fit-content;
     margin-top:  10px auto; /* Add this line to center the image horizontally */
     border: 2px solid black;
-    border-radius: 10%;
+    border-radius: 2%;
 }
 
 .games h3 {
@@ -49,6 +48,7 @@ body {
     text-align: center;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     
 }
 #numbers li, #stars li, #totolotoNumbers li {
@@ -99,10 +99,16 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Media queries for smaller devices */
+
 
 /* For devices with a width of up to 600px (commonly used for mobile) */
 @media only screen and (max-width: 600px) {
+    .number-ball, .bonus-ball {
+        width: 50px; /* Adjust width for mobile */
+        height: 50px; /* Adjust height for mobile */
+        font-size: 18px; /* Adjust font size for mobile */
+        line-height: 50px; /* Adjust vertical alignment */
+    }
     button {
         width: 80%; /* Make the button wider for easier tapping */
         font-size: 14px; /* Slightly smaller font size for mobile */
@@ -112,6 +118,12 @@ button:hover {
 
 /* For devices with a width of up to 400px (small mobile screens) */
 @media only screen and (max-width: 400px) {
+    .number-ball, .bonus-ball {
+        width: 40px; /* Smaller width for very small screens */
+        height: 40px; /* Smaller height for very small screens */
+        font-size: 16px; /* Smaller font size for very small screens */
+        line-height: 40px; /* Adjust vertical alignment */
+    }
     button {
         width: 90%; /* Make the button almost full width */
         font-size: 12px; /* Smaller font size */

@@ -60,7 +60,6 @@ const generateStars = (targetId)=> {
 
 const generateEuroButton = document.getElementById('generateEuroButton')
 
-
 const generateStarsButton = document.getElementById('generateStars')
 
 generateEuroButton.addEventListener("click", () => generateNumbers('numbers',5, true))
