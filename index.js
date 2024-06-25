@@ -1,4 +1,46 @@
+const historicalData = [
+    [15, 20, 21, 38, 42, 6],
+    [10, 14, 20, 28, 38, 6],
+    [5, 10, 15, 20, 25, 6],
+    // ... more data
+  ];
 
+
+    // Count the occurrences of each number
+    const countOccurrences = (data) => {
+        let counts = {};
+        data.forEach(draw => {
+          draw.forEach(number => {
+            counts[number] = counts[number] ? counts[number] + 1 : 1;
+          });
+        });
+        return counts;
+      };
+  
+      // Calculate the probabilities based on occurrences
+      const calculateProbabilities = (counts, totalDraws) => {
+        let probabilities = {};
+        for (let number in counts) {
+          probabilities[number] = counts[number] / totalDraws;
+        }
+        return probabilities;
+      };
+  
+      const numberCounts = countOccurrences(historicalData);
+      const totalDraws = historicalData.length;
+      const numberProbabilities = calculateProbabilities(numberCounts, totalDraws);
+  
+      // Function to generate a random number based on probabilities
+      const weightedRandom = (probabilities) => {
+        let sum = 0;
+        let r = Math.random();
+        for (let number in probabilities) {
+          sum += probabilities[number];
+          if (r <= sum) {
+            return parseInt(number);
+          }
+        }
+      };
 
 const generateNumbers = (targetId, count, includeStars = false) => {
     const numbers = [];
