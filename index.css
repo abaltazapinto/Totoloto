@@ -1,17 +1,17 @@
 body {
     background-color: burlywood;
-}
-
-.games-container {
+  }
+  
+  .games-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100%;
     flex-direction: column;
-}
-
-.games {
+  }
+  
+  .games {
     direction: column;
     align-items: center;
     max-width: 100%;
@@ -21,21 +21,22 @@ body {
     height: 100vh;
     text-align: center;
     margin: 20px;
-}
-.games > img {
+  }
+  
+  .games > img {
     width: 80%;
     height: auto;
     max-width: fit-content;
-    margin-top:  10px auto; /* Add this line to center the image horizontally */
+    margin-top: 10px auto; /* Add this line to center the image horizontally */
     border: 2px solid black;
     border-radius: 2%;
-}
-
-.games h3 {
+  }
+  
+  .games h3 {
     font-weight: bold;
-}
-
-#numbers, #stars, #totolotoNumbers {
+  }
+  
+  #numbers, #stars, #totolotoNumbers {
     list-style: none;
     padding: 0;
     margin: 10px 20px;
@@ -43,9 +44,9 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    
-}
-#numbers li, #stars li, #totolotoNumbers li {
+  }
+  
+  #numbers li, #stars li, #totolotoNumbers li {
     width: 40px;
     height: 40px;
     line-height: 40px; /* Center text vertically */
@@ -57,24 +58,25 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 16px;
-}
-
-.number-ball {
+  }
+  
+  .number-ball {
     background-color: green; /* Regular number color */
-}
-
-.bonus-ball {
+  }
+  
+  .bonus-ball {
     background-color: red; /* Bonus ball color */
     color: black; /* Change text color for contrast */
-}
-button {
+  }
+  
+  button {
     margin-top: 20px; /* Space between the button and the numbers */
     padding: 10px 20px;
     font-size: 16px;
-}
-
-/* Base styles for the button */
-button {
+  }
+  
+  /* Base styles for the button */
+  button {
     margin-top: 20px; /* Space between the button and the numbers */
     padding: 10px 20px;
     width: 40%;
@@ -85,42 +87,18 @@ button {
     color: #fff; /* Text color */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease; /* Smooth transition for background color */
-}
-
-
-/* Button hover effect */
-button:hover {
+  }
+  
+  /* Button hover effect */
+  button:hover {
     background-color: #0056b3;
-}
-
-
-
-/* For devices with a width of up to 600px (commonly used for mobile) */
-@media only screen and (max-width: 600px) {
+  }
+  
+  /* For devices with a width of up to 600px (commonly used for mobile) */
+  @media only screen and (max-width: 600px) {
     .number-ball, .bonus-ball {
-        width: 50px; /* Adjust width for mobile */
-        height: 50px; /* Adjust height for mobile */
-        font-size: 18px; /* Adjust font size for mobile */
-        line-height: 50px; /* Adjust vertical alignment */
-    }
-    button {
-        width: 80%; /* Make the button wider for easier tapping */
-        font-size: 14px; /* Slightly smaller font size for mobile */
-        padding: 12px 24px; /* Adjust padding for better touch interaction */
-    }
-}
-
-/* For devices with a width of up to 400px (small mobile screens) */
-@media only screen and (max-width: 400px) {
-    .number-ball, .bonus-ball {
-        width: 40px; /* Smaller width for very small screens */
-        height: 40px; /* Smaller height for very small screens */
-        font-size: 16px; /* Smaller font size for very small screens */
-        line-height: 40px; /* Adjust vertical alignment */
-    }
-    button {
-        width: 90%; /* Make the button almost full width */
-        font-size: 12px; /* Smaller font size */
-        padding: 14px 28px; /* Adjust padding */
-    }
-}
+      width: 50px; /* Adjust width for mobile */
+      height: 50px; /* Adjust height for mobile */
+      font-size: 18px; /* Adjust font size for mobile */
+      line-height: 50px; /* Adjust vertical alignmen
+  
