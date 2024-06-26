@@ -51,20 +51,20 @@ const generateNumbers = (targetId, count, includeStars = false) => {
 
     numbersShow.innerHTML = ''; 
 
-    while (numbers.length < count) {
-        let randomNumber = weightedRandom(numberProbabilities);
-        if (!numbers.includes(randomNumber)) {
-          numbers.push(randomNumber);
-        }
-      }
+    // while (numbers.length < count) {
+    //     let randomNumber = weightedRandom(numberProbabilities);
+    //     if (!numbers.includes(randomNumber)) {
+    //       numbers.push(randomNumber);
+    //     }
+    //   }
 
-    // for (let i = 0; i < 5; i++) {
-    //     let randomNumber;
-    //     do {
-    //         randomNumber = Math.floor(Math.random() * 50) + 1;
-    //     }while (numbers.includes(randomNumber));
-    //     numbers.push(randomNumber);
-    // }
+    for (let i = 0; i < 5; i++) {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 50) + 1;
+        }while (numbers.includes(randomNumber));
+        numbers.push(randomNumber);
+    }
 
     numbers.forEach((number,index) => {
         const numberElement = document.createElement('li');
@@ -80,57 +80,57 @@ const generateNumbers = (targetId, count, includeStars = false) => {
 }
 
 
-// const generateStars = (targetId)=> {
+const generateStars = (targetId)=> {
 
-//     const starsShow = document.getElementById(targetId)
-//     const numbersShow = document.getElementById(targetId)
+    const starsShow = document.getElementById(targetId)
+    const numbersShow = document.getElementById(targetId)
 
-//     if (!numbersShow) return;
+    if (!numbersShow) return;
 
-//     numbersShow.innerHTML = ''; 
+    numbersShow.innerHTML = ''; 
 
-//     if(!starsShow) return;
-//     const stars = [];
-//     for (let i = 0; i < 2; i++) {
-//         let randomNumber;
-//         do {
-//             randomNumber = Math.floor(Math.random() * 9) + 1;
-//         } while (stars.includes(randomNumber));
-//         stars.push(randomNumber);
-//     }
-
-//     stars.forEach((star, index) => {
-//         const starsElement = document.createElement('li');
-//         starsElement.className = 'bonus-ball'
-//         starsElement.textContent = `${star}`
-//         numbersShow.appendChild(starsElement)
-//     })
-
-// }
-
-const generateStars = (targetId) => {
-    const starsShow = document.getElementById(targetId);
-    if (!starsShow) return;
-
-    starsShow.innerHTML = ''; 
-
-    const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-1)));
-    const starProbabilities = calculateProbabilities(starCounts, totalDraws);
+    if(!starsShow) return;
     const stars = [];
-    while (stars.length < 2) {
-      let randomStar = weightedRandom(starProbabilities);
-      if (!stars.includes(randomStar)) {
-        stars.push(randomStar);
-      }
+    for (let i = 0; i < 2; i++) {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 9) + 1;
+        } while (stars.includes(randomNumber));
+        stars.push(randomNumber);
     }
 
     stars.forEach((star, index) => {
-      const starsElement = document.createElement('li');
-      starsElement.className = 'bonus-ball';
-      starsElement.textContent = `${star}`;
-      starsShow.appendChild(starsElement);
-    });
-  };
+        const starsElement = document.createElement('li');
+        starsElement.className = 'bonus-ball'
+        starsElement.textContent = `${star}`
+        numbersShow.appendChild(starsElement)
+    })
+
+}
+
+// const generateStars = (targetId) => {
+//     const starsShow = document.getElementById(targetId);
+//     if (!starsShow) return;
+
+//     starsShow.innerHTML = ''; 
+
+//     const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-1)));
+//     const starProbabilities = calculateProbabilities(starCounts, totalDraws);
+//     const stars = [];
+//     while (stars.length < 2) {
+//       let randomStar = weightedRandom(starProbabilities);
+//       if (!stars.includes(randomStar)) {
+//         stars.push(randomStar);
+//       }
+//     }
+
+//     stars.forEach((star, index) => {
+//       const starsElement = document.createElement('li');
+//       starsElement.className = 'bonus-ball';
+//       starsElement.textContent = `${star}`;
+//       starsShow.appendChild(starsElement);
+//     });
+//   };
 
 const generateEuroButton = document.getElementById('generateEuroButton')
 
@@ -139,7 +139,3 @@ const generateStarsButton = document.getElementById('generateStars')
 generateEuroButton.addEventListener("click", () => generateNumbers('numbers',5, true))
 
 generateStarsButton.addEventListener("click", () => generateStars ('stars'))
-
-
-
-
