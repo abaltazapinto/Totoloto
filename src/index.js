@@ -3,8 +3,9 @@ import{ getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/
 
 const appSettings = "https://euromilhoes-cbeff-default-rtdb.europe-west1.firebasedatabase.app/"
 
-firebase.initializeApp(appSettings);
-const database = firebase.database();
+const app = initializeApp(appSettings);
+const database = getDatabase(app);
+const historicalDataInDB = ref(database, 'historicalData');
 
 let historicalData = [
     [15, 20, 21, 38, 42],
