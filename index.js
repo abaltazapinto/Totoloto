@@ -1,21 +1,27 @@
 const historicalData = [
     [15, 20, 21, 38, 42, 6],
-    [10, 14, 20, 28, 38, 6],
+    [10, 14, 20, 28, 38, 4],
     [5, 10, 15, 20, 25, 6],
-    // ... more data
+    [1, 5, 10, 15, 20, 7],
+    [4, 18, 17, 19, 23, 4]    // ... more data
   ];
-
-
     // Count the occurrences of each number
     const countOccurrences = (data) => {
-        let counts = {};
+        var counts = {};
         data.forEach(draw => {
           draw.forEach(number => {
-            counts[number] = counts[number] ? counts[number] + 1 : 1;
+            counts[number] = (counts[number] || 0 ) +1;
           });
         });
         return counts;
-      };
+    };
+    
+      constTotalCount = historicalData.length * historicalData[0].length;
+
+      console.log("total count", constTotalCount)
+       
+
+      console.log("count of occurrences", countOccurrences(historicalData))
   
       // Calculate the probabilities based on occurrences
       const calculateProbabilities = (counts, totalDraws) => {
@@ -27,20 +33,46 @@ const historicalData = [
       };
   
       const numberCounts = countOccurrences(historicalData);
-      const totalDraws = historicalData.length;
+
+      console.log("historicalData", historicalData)
+      const totalDraws = historicalData[0].length * historicalData.length;
       const numberProbabilities = calculateProbabilities(numberCounts, totalDraws);
-  
+            
+      console.log("Number counts:", numberCounts);
+      console.log("Total draws:", totalDraws);
+
       // Function to generate a random number based on probabilities
+
       const weightedRandom = (probabilities) => {
         let sum = 0;
         let r = Math.random();
-        for (let number in probabilities) {
-          sum += probabilities[number];
-          if (r <= sum) {
-            return parseInt(number);
-          }
+
+        // caltculate the total sum of the probabilities
+        let total = Object.values(numberProbabilities).reduce((acc, curr) => acc + curr, 0);
+
+        console.log("total", total)
+
+        if (Math.abs(total - 1) > 0.00001) {
+          console.error("The sum of probabilities must equal 1. Current sum:", total);
+          return null;
         }
-      };
+        
+          for (let number in probabilities) {
+
+            sum += probabilities[number];
+            console.log (`sum of probabilities is:`, sum)
+
+            if (r <= sum) {
+              return parseInt(number);
+            }
+            console.log("r", r)
+          }
+          console.error("No number was selected. Check the probabilities.");
+          return null;
+        };
+
+        console.log("number of probabilities", numberProbabilities);
+        console.log("weighted random", weightedRandom(numberProbabilities));
 
 
 const generateNumbers = (targetId, count, includeStars = false) => {
@@ -51,21 +83,16 @@ const generateNumbers = (targetId, count, includeStars = false) => {
 
     numbersShow.innerHTML = ''; 
 
-    // while (numbers.length < count) {
-    //     let randomNumber = weightedRandom(numberProbabilities);
-    //     if (!numbers.includes(randomNumber)) {
-    //       numbers.push(randomNumber);
-    //     }
-    //   }
+console.log("random number", weightedRandom(numberProbabilities))  
 
-    for (let i = 0; i < 5; i++) {
-        let randomNumber;
-        do {
-            randomNumber = Math.floor(Math.random() * 50) + 1;
+for (let i = 0; i < 6; i++) {
+    let randomNumber;
+    do {
+        randomNumber = weightedRandom(numberProbabilities);
         }while (numbers.includes(randomNumber));
         numbers.push(randomNumber);
     }
-
+    console.log("Generated numbers:", numbers);
     numbers.forEach((number,index) => {
         const numberElement = document.createElement('li');
         numberElement.className = index === count - 0 ? 'bonus-ball' : 'number-ball';
@@ -73,64 +100,66 @@ const generateNumbers = (targetId, count, includeStars = false) => {
         numbersShow.appendChild(numberElement)
     })
 
-    if (includeStars) {
-        generateStars('stars')
-    }
+    // if (includeStars) {
+    //     generateStars('stars')
+    // }
 
 }
 
 
-const generateStars = (targetId)=> {
+// const generateStars = (targetId)=> {
 
-    const starsShow = document.getElementById(targetId)
-    const numbersShow = document.getElementById(targetId)
+//     const starsShow = document.getElementById(targetId)
+//     const numbersShow = document.getElementById(targetId)
 
-    if (!numbersShow) return;
+//     if (!numbersShow) return;
 
-    numbersShow.innerHTML = ''; 
+//     numbersShow.innerHTML = ''; 
 
-    if(!starsShow) return;
-    const stars = [];
-    for (let i = 0; i < 2; i++) {
-        let randomNumber;
-        do {
-            randomNumber = Math.floor(Math.random() * 9) + 1;
-        } while (stars.includes(randomNumber));
-        stars.push(randomNumber);
-    }
-
-    stars.forEach((star, index) => {
-        const starsElement = document.createElement('li');
-        starsElement.className = 'bonus-ball'
-        starsElement.textContent = `${star}`
-        numbersShow.appendChild(starsElement)
-    })
-
-}
-
-// const generateStars = (targetId) => {
-//     const starsShow = document.getElementById(targetId);
-//     if (!starsShow) return;
-
-//     starsShow.innerHTML = ''; 
-
-//     const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-1)));
-//     const starProbabilities = calculateProbabilities(starCounts, totalDraws);
+//     if(!starsShow) return;
 //     const stars = [];
-//     while (stars.length < 2) {
-//       let randomStar = weightedRandom(starProbabilities);
-//       if (!stars.includes(randomStar)) {
-//         stars.push(randomStar);
-//       }
+//     for (let i = 0; i < 2; i++) {
+//         let randomNumber;
+//         do {
+//             randomNumber = Math.floor(Math.random() * 9) + 1;
+//         } while (stars.includes(randomNumber));
+//         stars.push(randomNumber);
 //     }
 
 //     stars.forEach((star, index) => {
-//       const starsElement = document.createElement('li');
-//       starsElement.className = 'bonus-ball';
-//       starsElement.textContent = `${star}`;
-//       starsShow.appendChild(starsElement);
-//     });
-//   };
+//         const starsElement = document.createElement('li');
+//         starsElement.className = 'bonus-ball'
+//         starsElement.textContent = `${star}`
+//         numbersShow.appendChild(starsElement)
+//     })
+
+// }
+
+const generateStars = (targetId) => {
+    const starsShow = document.getElementById(targetId);
+    if (!starsShow) return;
+
+    starsShow.innerHTML = ''; 
+
+    const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-2)));
+
+    console.log("star counts", starCounts)
+    const starProbabilities = calculateProbabilities(starCounts, totalDraws);
+    const stars = [];
+    while (stars.length < 2) {
+      let randomStar = weightedRandom(starProbabilities);
+      if (!stars.includes(randomStar)) {
+        stars.push(randomStar);
+      }
+    }
+
+    stars.forEach((star, index) => {
+      const starsElement = document.createElement('li');
+      starsElement.className = 'bonus-ball';
+      starsElement.textContent = `${star}`;
+      starsShow.appendChild(starsElement);
+    });
+  };
 
 const generateEuroButton = document.getElementById('generateEuroButton')
 
@@ -139,3 +168,5 @@ const generateStarsButton = document.getElementById('generateStars')
 generateEuroButton.addEventListener("click", () => generateNumbers('numbers',5, true))
 
 generateStarsButton.addEventListener("click", () => generateStars ('stars'))
+
+console.log("number of probabilities" ,numberProbabilities)
