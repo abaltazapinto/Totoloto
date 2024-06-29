@@ -1,9 +1,17 @@
-const historicalData = [
-    [15, 20, 21, 38, 42, 6],
-    [10, 14, 20, 28, 38, 4],
-    [5, 10, 15, 20, 25, 6],
-    [1, 5, 10, 15, 20, 7],
-    [4, 18, 17, 19, 23, 4]    // ... more data
+import { inizializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import{ getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+
+const appSettings = "https://euromilhoes-cbeff-default-rtdb.europe-west1.firebasedatabase.app/"
+
+firebase.initializeApp(appSettings);
+const database = firebase.database();
+
+let historicalData = [
+    [15, 20, 21, 38, 42],
+    [10, 14, 20, 28, 38],
+    [5, 10, 15, 20, 25],
+    [1, 5, 10, 15, 20],
+    [4, 18, 17, 19, 23]    // ... more data
   ];
     // Count the occurrences of each number
     const countOccurrences = (data) => {
@@ -16,9 +24,9 @@ const historicalData = [
         return counts;
     };
     
-      constTotalCount = historicalData.length * historicalData[0].length;
+      const TotalCount = historicalData.length * historicalData[0].length;
 
-      console.log("total count", constTotalCount)
+      console.log("total count", TotalCount)
        
 
       console.log("count of occurrences", countOccurrences(historicalData))
@@ -33,7 +41,6 @@ const historicalData = [
       };
   
       const numberCounts = countOccurrences(historicalData);
-
       console.log("historicalData", historicalData)
       const totalDraws = historicalData[0].length * historicalData.length;
       const numberProbabilities = calculateProbabilities(numberCounts, totalDraws);
@@ -58,21 +65,23 @@ const historicalData = [
         }
         
           for (let number in probabilities) {
-
-            sum += probabilities[number];
-            console.log (`sum of probabilities is:`, sum)
-
+            sum += (1 - probabilities[number]);
+            console.log(`number: ${number}, sum: ${sum}. r: ${r}`)
             if (r <= sum) {
+              console.log("number", number)
               return parseInt(number);
-            }
-            console.log("r", r)
+            }            
           }
+        
+
           console.error("No number was selected. Check the probabilities.");
           return null;
         };
 
-        console.log("number of probabilities", numberProbabilities);
+        console.log("number of probabilities >", numberProbabilities);
         console.log("weighted random", weightedRandom(numberProbabilities));
+        console.log("weighted random", weightedRandom(numberProbabilities));
+
 
 
 const generateNumbers = (targetId, count, includeStars = false) => {
@@ -85,7 +94,7 @@ const generateNumbers = (targetId, count, includeStars = false) => {
 
 console.log("random number", weightedRandom(numberProbabilities))  
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 5; i++) {
     let randomNumber;
     do {
         randomNumber = weightedRandom(numberProbabilities);
@@ -93,6 +102,18 @@ for (let i = 0; i < 6; i++) {
         numbers.push(randomNumber);
     }
     console.log("Generated numbers:", numbers);
+    historicalData.push(numbers)
+
+    //firebase
+    const histoDataRef = database.ref('historialData');
+    histoDataRef.push(numbers)
+      .then(() => {
+        console.log("Data saved successfully to Firebase.", numbers);
+      })
+      .catch((error) => {
+        console.error("Error saving data to Firebase:", error);
+      });
+
     numbers.forEach((number,index) => {
         const numberElement = document.createElement('li');
         numberElement.className = index === count - 0 ? 'bonus-ball' : 'number-ball';
@@ -100,11 +121,13 @@ for (let i = 0; i < 6; i++) {
         numbersShow.appendChild(numberElement)
     })
 
+    console.log("historicalData", historicalData)
     // if (includeStars) {
     //     generateStars('stars')
     // }
 
 }
+
 
 
 // const generateStars = (targetId)=> {
@@ -135,31 +158,31 @@ for (let i = 0; i < 6; i++) {
 
 // }
 
-const generateStars = (targetId) => {
-    const starsShow = document.getElementById(targetId);
-    if (!starsShow) return;
+// const generateStars = (targetId) => {
+//     const starsShow = document.getElementById(targetId);
+//     if (!starsShow) return;
 
-    starsShow.innerHTML = ''; 
+//     starsShow.innerHTML = ''; 
 
-    const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-2)));
+//     const starCounts = countOccurrences(historicalData.map(draw => draw.slice(-2)));
 
-    console.log("star counts", starCounts)
-    const starProbabilities = calculateProbabilities(starCounts, totalDraws);
-    const stars = [];
-    while (stars.length < 2) {
-      let randomStar = weightedRandom(starProbabilities);
-      if (!stars.includes(randomStar)) {
-        stars.push(randomStar);
-      }
-    }
+//     console.log("star counts", starCounts)
+//     const starProbabilities = calculateProbabilities(starCounts, totalDraws);
+//     const stars = [];
+//     while (stars.length < 2) {
+//       let randomStar = weightedRandom(starProbabilities);
+//       if (!stars.includes(randomStar)) {
+//         stars.push(randomStar);
+//       }
+//     }
 
-    stars.forEach((star, index) => {
-      const starsElement = document.createElement('li');
-      starsElement.className = 'bonus-ball';
-      starsElement.textContent = `${star}`;
-      starsShow.appendChild(starsElement);
-    });
-  };
+//     stars.forEach((star, index) => {
+//       const starsElement = document.createElement('li');
+//       starsElement.className = 'bonus-ball';
+//       starsElement.textContent = `${star}`;
+//       starsShow.appendChild(starsElement);
+//     });
+//   };
 
 const generateEuroButton = document.getElementById('generateEuroButton')
 
