@@ -53,7 +53,7 @@ let historicalData = [
       const TotalCount = historicalData.length * historicalData[0].length;
 
       console.log("total count", TotalCount)
-       
+      console.log(countOccurrences(historicalData) )
 
       console.log("count of occurrences", countOccurrences(historicalData))
   
