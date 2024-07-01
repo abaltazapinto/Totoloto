@@ -217,7 +217,7 @@ const generateLuckyNumber = () => {
 
   luckyShow.innerHTML = ''; // Clear existing content
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 1; i++) {
       let randomNumber;
       do {
           randomNumber = weightedRandomLucky(luckyProbabilities); // Ensure luckyProbabilities is defined
