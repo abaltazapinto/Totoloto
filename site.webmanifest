@@ -1,0 +1,39 @@
+{
+    "name": "Euro Milhoes",
+    "short_name": "Play Euro Milhoes",
+    "icons": [
+        {
+            "src": "assets/imagem_48*48.jpg",
+            "sizes": "48x48",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "assets/imagem_72*72.jpg",
+            "sizes": "72x72",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "assets/imagem_96.jpg",
+            "sizes": "96x96",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "assets/imagem_128.jpg",
+            "sizes": "128x128",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "assets/imagem_192.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "assets/imagem_512.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ],
+    "theme_color": "#EEF0F4",
+    "background_color": "#EEF0F4",
+    "display": "standalone"
+}
