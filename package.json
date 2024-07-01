@@ -1,6 +1,6 @@
 {
-  "name": "euromilhoes",
-  "description": "euromilhoes",
+  "name": "Totoloto",
+  "description": "Totoloto",
   "scripts": {
     "start": "parcel  src/index.html",
     "dev": "vite",
