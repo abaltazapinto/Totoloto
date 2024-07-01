@@ -39,6 +39,10 @@ let historicalData = [
     [15, 20, 21, 38,42], // (6) Sorteio: 050/2024 totoloto
     [17, 19, 32 , 33, 41] // (5) Sorteio: 051/2024 totoloto
   ];
+
+  let luckyNumber = [
+    [6],[10],[3],[10],[5],[2],[10],[5],[8],[1],[6],[13],[1],[10],[10],[1],[13],[6],[3],[12],[4], [6],[5],[6],[6],[6],[6],[1],[6],[5] 
+  ]
     // Count the occurrences of each number
     const countOccurrences = (data) => {
         var counts = {};
@@ -49,13 +53,11 @@ let historicalData = [
         });
         return counts;
     };
-    
+  
+  
       const TotalCount = historicalData.length * historicalData[0].length;
+      const TotalCountLucky = luckyNumber.length * luckyNumber[0].length;
 
-      console.log("total count", TotalCount)
-      console.log(countOccurrences(historicalData) )
-
-      console.log("count of occurrences", countOccurrences(historicalData))
   
       // Calculate the probabilities based on occurrences
       const calculateProbabilities = (counts, totalDraws) => {
@@ -66,13 +68,25 @@ let historicalData = [
         return probabilities;
       };
   
+      // Calculate the probabilities of the lucky number
+      const calculateProbabilitiesLucky = (counts, totalDraws) => {
+        let probabilities = {};
+        for (let number in counts) {
+          probabilities[number] = counts[number] / totalDraws;
+        }
+        return probabilities;
+      };
+
+      console.log("calculate probabilities", calculateProbabilities(countOccurrences(luckyNumber), TotalCount))
+
       const numberCounts = countOccurrences(historicalData);
-      console.log("historicalData", historicalData)
+      const luckyCounts = countOccurrences(luckyNumber);
+
       const totalDraws = historicalData[0].length * historicalData.length;
+      const luckyDraws = luckyNumber[0].length * luckyNumber.length;
+
       const numberProbabilities = calculateProbabilities(numberCounts, totalDraws);
-            
-      console.log("Number counts:", numberCounts);
-      console.log("Total draws:", totalDraws);
+      const luckyProbabilities = calculateProbabilitiesLucky(luckyCounts, luckyDraws);
 
       // Function to generate a random number based on probabilities
 
@@ -106,9 +120,40 @@ let historicalData = [
           return null;
         };
 
+        const weightedRandomLucky = (probabilities) => {
+          let sum = 0;
+          let r = Math.random();
+  
+          // caltculate the total sum of the probabilities
+          let total = Object.values(luckyCounts).reduce((acc, curr) => acc + curr, 0);
+  
+          console.log("total", total)
+  
+          if (Math.abs(total - 1) > 0.00001) {
+            console.error("The sum of probabilities must equal 1. Current sum:", total);
+                // Normalize probabilities if needed
+                for (let number in probabilities) {
+                  probabilities[number] /= total;
+                }
+            }
+          
+            for (let number in probabilities) {
+              sum += (probabilities[number]);
+              console.log(`Lucky number: ${number}, sum: ${sum}. r: ${r}`)
+              if (r <= sum) {
+                console.log("Lucky number", number)
+                return parseInt(number);
+              }            
+            }
+          
+            console.error("No number was selected. Check the probabilities.");
+            return null;
+          };
+
+
         console.log("number of probabilities >", numberProbabilities);
         console.log("weighted random", weightedRandom(numberProbabilities));
-        console.log("weighted random", weightedRandom(numberProbabilities));
+        console.log("weighted random of lucky probability", weightedRandom(luckyProbabilities));
 
 
 
@@ -158,35 +203,7 @@ for (let i = 0; i < 5; i++) {
 
 
 
-// const generateStars = (targetId)=> {
-
-//     const starsShow = document.getElementById(targetId)
-//     const numbersShow = document.getElementById(targetId)
-
-//     if (!numbersShow) return;
-
-//     numbersShow.innerHTML = ''; 
-
-//     if(!starsShow) return;
-//     const stars = [];
-//     for (let i = 0; i < 2; i++) {
-//         let randomNumber;
-//         do {
-//             randomNumber = Math.floor(Math.random() * 9) + 1;
-//         } while (stars.includes(randomNumber));
-//         stars.push(randomNumber);
-//     }
-
-//     stars.forEach((star, index) => {
-//         const starsElement = document.createElement('li');
-//         starsElement.className = 'bonus-ball'
-//         starsElement.textContent = `${star}`
-//         numbersShow.appendChild(starsElement)
-//     })
-
-// }
-
-const generateStars = (targetId) => {
+const generateLuckyNumber = (targetId) => {
     const starsShow = document.getElementById(targetId);
     if (!starsShow) return;
 
@@ -199,7 +216,7 @@ const generateStars = (targetId) => {
     
     const stars = [];
     while (stars.length < 2) {
-      let randomStar = weightedRandom(starProbabilities);
+      let randomStar = weightedRandom(luckyProbabilities);
       if (!stars.includes(randomStar)) {
         stars.push(randomStar);
       }
